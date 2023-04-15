@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+                    http://www.liquibase.org/xml/ns/dbchangelog-ext
+                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="2023-04-15--0002-user" author="ntropin">
+        <preConditions>
+            <not>
+                <tableExists tableName="User"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="User">
+            <column name="UserID"
+                    type="NUMERIC(15, 0)"
+                    autoIncrement="true">
+
+                <constraints
+                        nullable="false"
+                        primaryKey="true"
+                        references="Order(OrderID)"
+                        deleteCascade="true"/>
+            </column>
+
+            <column name="Name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="Phone" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="Mail" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="Password" type="VARCHAR(10, 0)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="Image" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="CustomerOrNot" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column> // подумать над этим
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
